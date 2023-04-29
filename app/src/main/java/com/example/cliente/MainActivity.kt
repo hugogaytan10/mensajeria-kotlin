@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 
-
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 // FCM SDK (and your app) can post notifications.
             } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 // TODO: display an educational UI explaining to the user the features that will be enabled
-                //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+                //       by them granting the NOTIFICATION permission. This UI should provide the user
                 //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
                 //       If the user selects "No thanks," allow the user to continue without notifications.
             } else {
@@ -75,6 +74,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
     /**
      * Called if the FCM registration token is updated. This may occur if the security of
