@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "611513094538",
+    "project_id": "fir-cloud-messenging-7baef",
+    "storage_bucket": "fir-cloud-messenging-7baef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:611513094538:android:eef254b960a5b10efbf873",
+        "android_client_info": {
+          "package_name": "com.example.cliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "611513094538-7hu0ct36f8d7k9ck4ov56qtv81u7vimv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cliente",
+            "certificate_hash": "42048580af7a77aecb19aa380d0c6c1282094693"
+          }
+        },
+        {
+          "client_id": "611513094538-gf28dj1s2fvcdsv145s3l5oanu667bvj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMm7HW9O1hxnHEk5-FhSUpSCoeaihU9OU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "611513094538-gf28dj1s2fvcdsv145s3l5oanu667bvj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
