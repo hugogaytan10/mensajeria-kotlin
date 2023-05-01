@@ -1,29 +1,56 @@
 package com.example.cliente
 
+import android.app.NotificationManager
+import android.content.Context
 import android.util.Log
+import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
-    val TAG = "MiToken"
 
-    override fun onMessageReceived(message: RemoteMessage) {
-        super.onMessageReceived(message)
-        Log.d(TAG, "Mensaje en primer: ${message.notification!!.title}")
+    override fun onNewToken(token: String) {
+        Log.d(TAG, "Nuevo token: $token")
+        enviarTokenAServidor(token)
     }
 
-    /**
-     * Called if the FCM registration token is updated. This may occur if the security of
-     * the previous token had been compromised. Note that this is called when the
-     * FCM registration token is initially generated so this is where you would retrieve the token.
-     */
-    override fun onNewToken(token: String) {
-        Log.d(TAG, "Refreshed token: $token")
+    private fun enviarTokenAServidor(token: String) {
+        // Llamar a la ruta "/registerToken" en tu servidor para registrar el token
+        // Utiliza una biblioteca de cliente HTTP como OkHttp o Retrofit para hacer la solicitud
+        // ...
 
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // FCM registration token to your app server.
-        //sendRegistrationToServer(token)
+        // Ejemplo utilizando la biblioteca OkHttp
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("http://192.168.0.5:3000/registerToken")
+            .post("{\"token\":\"$token\"}".toRequestBody("application/json".toMediaTypeOrNull()))
+            .build()
+
+        client.newCall(request).execute()
+    }
+
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Log.d(TAG, "Mensaje recibido de: ${remoteMessage.from}")
+
+        // Crear una notificación para el mensaje recibido
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setContentTitle(remoteMessage.notification?.title)
+            .setContentText(remoteMessage.notification?.body)
+            .setSmallIcon(R.drawable.ic_launcher_background)
+
+        // Mostrar la notificación
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(0, notificationBuilder.build())
+    }
+
+    companion object {
+        private const val TAG = "MyFirebaseMessagingService"
+        private const val CHANNEL_ID = "my_channel_id"
     }
 }
