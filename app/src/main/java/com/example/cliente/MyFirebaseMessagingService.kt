@@ -32,7 +32,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Ejemplo utilizando la biblioteca OkHttp
         val client = OkHttpClient()
         val request = Request.Builder()
-            .url("http://192.168.8.15:3000/registerToken")
+            .url("http://192.168.1.11:3000/registerToken")
             .post("{\"token\":\"$token\"}".toRequestBody("application/json".toMediaTypeOrNull()))
             .build()
 
