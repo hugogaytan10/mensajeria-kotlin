@@ -11,6 +11,7 @@ import com.google.firebase.messaging.RemoteMessage
 import android.util.Log
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
@@ -20,8 +21,23 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         // Aquí se debe enviar el token al servidor
         //sendNotification(token)
+        //println(token)
+        enviarTokenAServidor(token)
     }
+    private fun enviarTokenAServidor(token: String) {
+        // Llamar a la ruta "/registerToken" en tu servidor para registrar el token
+        // Utiliza una biblioteca de cliente HTTP como OkHttp o Retrofit para hacer la solicitud
+        // ...
+    //println("hola quiero saber si aqui entra: " + token)
+        // Ejemplo utilizando la biblioteca OkHttp
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("http://192.168.8.15:3000/registerToken")
+            .post("{\"token\":\"$token\"}".toRequestBody("application/json".toMediaTypeOrNull()))
+            .build()
 
+        client.newCall(request).execute()
+    }
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         // Aquí se debe manejar la recepción del mensaje
         // y mostrar una notificación en la aplicación
